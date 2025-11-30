@@ -36,3 +36,8 @@ canvas {
 sp-button:not(:last-child) {
     margin-right: 8px;
 }
+
+.presets {
+    margin-bottom: 12px; /* Adds space below the dropdown */
+    width: 100%;
+}
