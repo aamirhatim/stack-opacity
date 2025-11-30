@@ -1,7 +1,8 @@
 const { app, core } = require('photoshop');
 
 const PRESETS = {
-    default: [{ x: 0, y: 1 }, { x: 1, y: 0 }], 
+    default: [{ x: 0, y: 1 }, { x: 1, y: 0 }],
+    full: [{ x: 0, y: 1 }, { x: 1, y: 1 }],
     comet: [{ x: 0, y: 1 }, { x: 0.1, y: 0.7 }, { x: 1, y: 0 }],
     fade_in: [{ x: 0, y: 0 }, { x: 1, y: 1 }], 
     bell: [{ x: 0, y: 0 }, { x: 0.5, y: 1 }, { x: 1, y: 0 }]
