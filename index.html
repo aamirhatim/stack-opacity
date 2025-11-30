@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <sp-heading>Opacity Spline</sp-heading>
+    <p class="instructions">Click to add points. Drag to move. Double-click to remove.</p>
+    
+    <div class="curve-container" id="curveWrapper">
+        <canvas id="curveCanvas"></canvas>
+    </div>
+
+    <footer>
+        <sp-button id="btnRun" variant="cta">Apply Curve to Stack</sp-button>
+        <sp-button id="btnReset" variant="secondary">Reset</sp-button>
+    </footer>
+</body>
+</html>

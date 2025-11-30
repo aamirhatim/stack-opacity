@@ -1,0 +1,26 @@
+{
+  "id": "opacity-spline",
+  "name": "Opacity Spline",
+  "version": "1.0.0",
+  "main": "index.html",
+  "host": [
+    {
+        "app": "PS",
+        "minVersion": "23.3.0"
+    }
+  ],
+  "manifestVersion": 5,
+  "entrypoints": [
+    {
+      "type": "panel",
+      "id": "mainPanel",
+      "label": {
+        "default": "Opacity Spline"
+      },
+      "minimumSize": {
+        "width": 300,
+        "height": 400
+      }
+    }
+  ]
+}
