@@ -1,33 +1,27 @@
 const { app, core } = require('photoshop');
 
+const PRESETS = {
+    default: [{ x: 0, y: 1 }, { x: 1, y: 0 }], 
+    comet: [{ x: 0, y: 1 }, { x: 0.1, y: 0.7 }, { x: 1, y: 0 }],
+    fade_in: [{ x: 0, y: 0 }, { x: 1, y: 1 }], 
+    bell: [{ x: 0, y: 0 }, { x: 0.5, y: 1 }, { x: 1, y: 0 }]
+};
+
 class CurveEditor {
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
 
         // Set internal sie for sharpness
-        try {
-            if (canvas.parentElement) {
-                this.width = canvas.parentElement.clientWidth;
-                this.height = canvas.parentElement.clientHeight;
-                this.canvas.width = this.width;
-                this.canvas.height = this.height;
-                console.log(`Canvas size: ${this.width}x${this.height}`);
-            } else {
-                console.error("Canvas parent element not found for sizing!");
-                this.width = 300; this.height = 200;
-                this.canvas.width = this.width;
-                this.canvas.height = this.height;
-            }
-        } catch (error) {
-            console.error("Error during initial sizing:", e);
-        }
+        this.width = canvas.parentElement.clientWidth;
+        this.height = canvas.parentElement.clientHeight;
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
+        console.log(`Canvas size: ${this.width}x${this.height}`);
 
-        // Create default curve points (diagonal)
-        this.points = [
-            { x: 0, y: 1 },
-            { x: 1, y: 0 }
-        ];
+        // Set default curve
+        this.currentPreset = 'default';
+        this.loadPreset('default');
 
         // Unset indicator for the point that is being dragged
         this.dragIndex = -1;
@@ -41,6 +35,15 @@ class CurveEditor {
         this.canvas.addEventListener('pointerdown', (e) => this.onPointerDown(e));
         this.canvas.addEventListener('pointermove', (e) => this.onPointerMove(e));
         this.canvas.addEventListener('pointerup', () => this.onPointerUp());
+    }
+
+    loadPreset(presetName) {
+        console.log(`Loading preset: ${presetName}`);
+        if (PRESETS[presetName]) {
+            this.points = JSON.parse(JSON.stringify(PRESETS[presetName])); 
+            this.draw();
+            this.currentPreset = presetName;
+        }
     }
 
     // Get opacity value at specified x coordinate
@@ -171,9 +174,8 @@ class CurveEditor {
     }
 
     reset() {
-        // Reset spline to default diagonal
-        this.points = [{ x: 0, y: 1 }, { x: 1, y: 0 }];
-        this.draw();
+        // Reset spline to default prest values
+        this.loadPreset(this.currentPreset);
     }
 }
 
@@ -211,19 +213,49 @@ async function runPlugin(editor) {
 // Initialize Curve Editor
 console.log("getting canvas element");
 const canvasElement = document.getElementById('curveCanvas');
+const presetSelect = document.getElementById('presetSelect');
 
-if (canvasElement) {
-    setTimeout(() => {
-        console.log('Canvas element found, deferring initialization.');
-        const parent = canvasElement.parentElement;
-        if (parent) {
-            console.log(`DEFERRED check: Parent width=${parent.clientWidth}, height=${parent.clientHeight}`);
-        }
 
+function waitForLayout(canvasElement, retries = 0) {
+    const MAX_RETRIES = 20;
+    const parent = canvasElement.parentElement;
+
+    if (parent && parent.clientWidth > 0 && parent.clientHeight > 0) {
+        console.log(`Layout ready after ${retries} checks. Initializing CurveEditor.`);
+
+        // Create new curve editor
+        const editor = new CurveEditor(canvasElement);
+
+        // Create listener for preset menu
+        presetSelect.addEventListener('change', (e) => {
+            console.log(`Preset selected: ${e.target.value}`);
+            editor.loadPreset(e.target.value);
+        });
+
+        // Create button listeners
+        document.getElementById('btnReset').addEventListener('click', () => editor.reset());
+        document.getElementById('btnRun').addEventListener('click', () => runPlugin(editor));
+        return;
+    }
+
+    if (retries >= MAX_RETRIES) {
+        console.error("Failed to get non-zero dimensions after max retries. Plugin may not size correctly.");
+        
+        // Fallback is to initialize anyways
+        // TODO change this behavior later
         const editor = new CurveEditor(canvasElement);
         document.getElementById('btnReset').addEventListener('click', () => editor.reset());
         document.getElementById('btnRun').addEventListener('click', () => runPlugin(editor));
-    }, 50);
+        return;
+    }
+
+    retries++;
+    setTimeout(() => waitForLayout(canvasElement, retries), 10); // Wait 10ms before calling next retry
+}
+
+if (canvasElement && presetSelect) {
+    console.log('Starting layout check loop...');
+    waitForLayout(canvasElement);
 } else {
-    console.error('Canvas element not found!');
+    console.error('Missing required elements (canvas or presetSelect)!');
 }
