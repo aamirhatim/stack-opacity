@@ -9,7 +9,7 @@
     <p class="instructions">Click to add points. Drag to move. Double-click to remove.</p>
 
     <div class="presets">
-        <sp-dropdown placeholder="Presets" id="presetSelect">
+        <sp-picker placeholder="Presets" id="presetSelect">
             <sp-label slot="label" is-required="true">Presets</sp-label>
             <sp-menu slot="options">
                 <sp-menu-item value="default" selected>Custom Curve</sp-menu-item>
@@ -17,7 +17,7 @@
                 <sp-menu-item value="fade_in">Reverse Comet (Ramp Up)</sp-menu-item>
                 <sp-menu-item value="bell">Bell Curve (Fade In/Out)</sp-menu-item>
             </sp-menu>
-        </sp-dropdown>
+        </sp-picker>
     </div>
     
     <div class="curve-container" id="curveWrapper">
