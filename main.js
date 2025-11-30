@@ -12,16 +12,12 @@ class CurveEditor {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
 
-        // Set internal sie for sharpness
-        this.width = canvas.parentElement.clientWidth;
-        this.height = canvas.parentElement.clientHeight;
-        this.canvas.width = this.width;
-        this.canvas.height = this.height;
-        console.log(`Canvas size: ${this.width}x${this.height}`);
-
         // Set default curve
         this.currentPreset = 'default';
         this.loadPreset('default');
+
+        // Set canvas size
+        this.resizeCanvas();
 
         // Unset indicator for the point that is being dragged
         this.dragIndex = -1;
@@ -35,6 +31,7 @@ class CurveEditor {
         this.canvas.addEventListener('pointerdown', (e) => this.onPointerDown(e));
         this.canvas.addEventListener('pointermove', (e) => this.onPointerMove(e));
         this.canvas.addEventListener('pointerup', () => this.onPointerUp());
+        window.addEventListener('resize', () => this.resizeCanvas());
     }
 
     loadPreset(presetName) {
@@ -48,7 +45,7 @@ class CurveEditor {
 
     // Get opacity value at specified x coordinate
     getValueAt(xPos) {
-        // 1. Find the segment this xPosition falls into
+        // 1. Find the segment this xPos falls into
         let i = 0;
         while (i < this.points.length && this.points[i].x < xPos) {
             i++;
@@ -78,6 +75,24 @@ class CurveEditor {
             x: (e.clientX - rect.left) / rect.width,
             y: 1 - ((e.clientY - rect.top) / rect.height)
         };
+    }
+
+    // Update canvas size according to parent dimensions
+    resizeCanvas() {
+        const parent = this.canvas.parentElement;
+        if (parent) {
+            // Update dimensions
+            this.width = parent.clientWidth;
+            this.height = parent.clientHeight;
+
+            // Set canvas dimensions
+            this.canvas.width = this.width;
+            this.canvas.height = this.height;
+            console.log(`Canvas size: ${this.width}x${this.height}`);
+
+            // Redraw
+            this.draw();
+        }
     }
 
     onPointerDown(e) {
@@ -225,6 +240,8 @@ function waitForLayout(canvasElement, retries = 0) {
 
         // Create new curve editor
         const editor = new CurveEditor(canvasElement);
+
+
 
         // Create listener for preset menu
         presetSelect.addEventListener('change', (e) => {
