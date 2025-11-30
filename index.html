@@ -5,9 +5,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <sp-heading>Opacity Spline</sp-heading>
-    <p class="instructions">Click to add points. Drag to move. Double-click to remove.</p>
-
     <div class="presets">
         <sp-picker placeholder="Presets" id="presetSelect">
             <sp-label slot="label" is-required="true">Presets</sp-label>
@@ -23,6 +20,10 @@
     <div class="curve-container" id="curveWrapper">
         <canvas id="curveCanvas"></canvas>
     </div>
+
+    <sp-body size="XS" class="instructions">
+        Click to add points. Drag to move. Double-click to remove.
+    </sp-body>
 
     <footer>
         <sp-button id="btnRun" variant="cta">Apply Curve to Stack</sp-button>
