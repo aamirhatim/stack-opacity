@@ -32,6 +32,7 @@ class CurveEditor {
         this.canvas.addEventListener('pointerdown', (e) => this.onPointerDown(e));
         this.canvas.addEventListener('pointermove', (e) => this.onPointerMove(e));
         this.canvas.addEventListener('pointerup', () => this.onPointerUp());
+        this.canvas.addEventListener('dblclick', (e) => this.onDbClick(e));
         window.addEventListener('resize', () => this.resizeCanvas());
     }
 
@@ -137,6 +138,11 @@ class CurveEditor {
             let newX = Math.max(minX, Math.min(maxX, m.x));
             let newY = Math.max(0, Math.min(1, m.y));
 
+            // Lock X-coordinate for first and last points
+            if (this.dragIndex === 0 || this.dragIndex === this.points.length - 1) {
+                newX = this.points[this.dragIndex].x; 
+            }
+
             // Update point position and redraw
             this.points[this.dragIndex] = { x: newX, y: newY };
             this.draw();
@@ -146,6 +152,21 @@ class CurveEditor {
     onPointerUp() {
         console.log("Pointer up");
         this.dragIndex = -1; // Reset drag index point
+    }
+
+    onDbClick(e) {
+        console.log("Double click");
+        const m = this.getMousePos(e);
+
+        // Check if clicking an existing point
+        const hitDist = 0.05; // Hit box size
+        const foundIndex = this.points.findIndex(p => Math.abs(p.x - m.x) < hitDist && Math.abs(p.y - m.y) < hitDist);
+        
+        if (foundIndex !== -1 && foundIndex > 0 && foundIndex < this.points.length - 1) {
+            // Remove point
+            this.points.splice(foundIndex, 1);
+            this.draw();
+        }
     }
 
     draw() {
