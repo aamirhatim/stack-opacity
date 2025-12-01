@@ -2,8 +2,6 @@
 
 The **Stack Opacity** plugin for Adobe Photoshop provides a powerful, visual curve editor to define and apply custom opacity gradients across a stack of selected layers. This tool is ideal for creating effects like comet tails, volumetric lighting, or complex layer transitions with precision.
 
------
-
 ## ✨ Features
 
   * **Interactive Curve Editor:** Visually define the opacity falloff using a simple curve editor.
@@ -14,8 +12,6 @@ The **Stack Opacity** plugin for Adobe Photoshop provides a powerful, visual cur
   * **Presets:** Quickly load pre-defined curves like "Comet," "Bell," or "Full."
   * **Invert Functionality:** Horizontally mirror the current curve (flip the effect across the layer stack).
   * **Responsive UI:** The editor dynamically resizes when the panel is docked or floating.
-
------
 
 ## 🚀 How to Use
 
@@ -33,8 +29,6 @@ The Y-axis represents the layer's opacity, from **0 (transparent)** to **1 (opaq
       * It will set the opacity of each layer based on the curve's value at that layer's corresponding position (X-value).
       * ***Note:*** The code sets the blend mode to `lighten` for the effect, but this can be adjusted manually after application.
 4.  **Manage Curve:** Use the **Invert** button to horizontally flip the curve, or the **Reset** button to return to the default diagonal line.
-
------
 
 ## ⬇️ How to Install and Run
 
