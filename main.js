@@ -227,6 +227,37 @@ class CurveEditor {
         });
     }
 
+    invert() {
+        // 1. Apply the X-axis mirror transformation
+        this.points = this.points.map(p => {
+            return {
+                x: 1.0 - p.x, 
+                y: p.y 
+            };
+        });
+        
+        // 2. Re-sort the array
+        this.points.sort((a, b) => a.x - b.x); 
+        
+        this.draw();
+        
+        // Optional: Reset the preset selector to 'Custom Curve' after modification
+        const presetSelect = document.getElementById('presetSelect');
+        if (presetSelect) {
+            // Find the currently selected item and remove the 'selected' attribute
+            const currentSelected = presetSelect.querySelector('sp-menu-item[selected]');
+            if (currentSelected) {
+                currentSelected.removeAttribute('selected');
+            }
+
+            // Find the 'default' item and add the 'selected' attribute
+            const defaultItem = presetSelect.querySelector('sp-menu-item[value="default"]');
+            if (defaultItem) {
+                defaultItem.setAttribute('selected', '');
+            }
+        }
+    }
+
     reset() {
         // Reset spline to default prest values
         this.loadPreset(this.currentPreset);
@@ -290,6 +321,7 @@ function waitForLayout(canvasElement, retries = 0) {
 
         // Create button listeners
         document.getElementById('btnReset').addEventListener('click', () => editor.reset());
+        document.getElementById('btnInvert').addEventListener('click', () => editor.invert());
         document.getElementById('btnRun').addEventListener('click', () => runPlugin(editor));
         return;
     }
@@ -301,6 +333,7 @@ function waitForLayout(canvasElement, retries = 0) {
         // TODO change this behavior later
         const editor = new CurveEditor(canvasElement);
         document.getElementById('btnReset').addEventListener('click', () => editor.reset());
+        document.getElementById('btnInvert').addEventListener('click', () => editor.invert());
         document.getElementById('btnRun').addEventListener('click', () => runPlugin(editor));
         return;
     }
