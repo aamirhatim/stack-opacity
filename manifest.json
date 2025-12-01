@@ -12,27 +12,27 @@
   "manifestVersion": 5,
   "entrypoints": [
     {
-      "type": "panel",
-      "id": "mainPanel",
-      "label": {
-        "default": "Stack Opacity"
-      },
-      "minimumSize": {
-        "width": 300,
-        "height": 300
-      },
-      "maximumSize":{
-        "width": 800,
-        "height": 700
-      },
-      "preferredFloatingSize": { 
-        "width": 300,
-        "height": 400
-      },
-      "preferredDockedSize": {
-        "width": 500,
-        "height": 300
-      }
+        "type": "panel",
+        "id": "mainPanel",
+        "label": {
+            "default": "Stack Opacity"
+        },
+        "minimumSize": {
+            "width": 300,
+            "height": 300
+        },
+        "maximumSize":{
+            "width": 800,
+            "height": 700
+        },
+        "preferredFloatingSize": { 
+            "width": 300,
+            "height": 400
+        },
+        "preferredDockedSize": {
+            "width": 500,
+            "height": 300
+        }
     }
   ]
 }
