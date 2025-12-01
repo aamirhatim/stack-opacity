@@ -7,9 +7,14 @@ body {
     height: 100%;
     width: 100%;
     padding: 12px; 
-    color: #FFF; 
     display: flex;
     flex-direction: column;
+
+    background-color: var(--uxp-host-background-color);
+    color: var(--uxp-host-text-color);
+    border-color: var(--uxp-host-border-color);
+    font-size: var(--uxp-host-font-size);
+
 }
 
 sp-heading {
@@ -19,7 +24,7 @@ sp-heading {
 
 .curve-container {
     position: relative;
-    border: 1px solid #555;
+    border: 1px solid var(--uxp-host-border-color);
     cursor: crosshair;
     flex-grow: 1;
     width: 100%;
@@ -32,8 +37,8 @@ canvas {
 }
 
 .instructions {
+    color: var(--uxp-host-text-color-secondary);
     flex-shrink: 0;
-    color: #aaa;
     padding: 4px;
 }
 
