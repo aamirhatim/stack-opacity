@@ -1,6 +1,6 @@
 {
-  "id": "opacity-spline",
-  "name": "Opacity Spline",
+  "id": "stack-opacity",
+  "name": "Stack Opacity",
   "version": "1.0.0",
   "main": "index.html",
   "host": [
@@ -15,7 +15,7 @@
       "type": "panel",
       "id": "mainPanel",
       "label": {
-        "default": "Opacity Spline"
+        "default": "Stack Opacity"
       },
       "minimumSize": {
         "width": 300,
