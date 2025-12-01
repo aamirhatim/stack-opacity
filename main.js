@@ -185,7 +185,22 @@ class CurveEditor {
         this.ctx.strokeStyle = '#444';
         this.ctx.lineWidth = 1;
         this.ctx.beginPath();
-        this.ctx.moveTo(0, h/2); this.ctx.lineTo(w, h/2); // Center line
+        const steps = [0.25, 0.5, 0.75];
+
+        // Draw Horizontal Lines
+        for (let step of steps) {
+            const y = h * step;
+            this.ctx.moveTo(0, y);
+            this.ctx.lineTo(w, y);
+        }
+
+        // Draw Vertical Lines
+        for (let step of steps) {
+            const x = w * step;
+            this.ctx.moveTo(x, 0);
+            this.ctx.lineTo(x, h);
+        }
+
         this.ctx.stroke();
 
         // Draw Curve (Connecting lines)
