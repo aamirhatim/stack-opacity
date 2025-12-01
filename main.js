@@ -227,7 +227,7 @@ class CurveEditor {
     }
 
     invert() {
-        // 1. Apply the X-axis mirror transformation
+        // Apply the X-axis mirror transformation
         this.points = this.points.map(p => {
             return {
                 x: 1.0 - p.x, 
@@ -235,26 +235,9 @@ class CurveEditor {
             };
         });
         
-        // 2. Re-sort the array
+        // Re-sort the array
         this.points.sort((a, b) => a.x - b.x); 
-        
         this.draw();
-        
-        // Optional: Reset the preset selector to 'Custom Curve' after modification
-        const presetSelect = document.getElementById('presetSelect');
-        if (presetSelect) {
-            // Find the currently selected item and remove the 'selected' attribute
-            const currentSelected = presetSelect.querySelector('sp-menu-item[selected]');
-            if (currentSelected) {
-                currentSelected.removeAttribute('selected');
-            }
-
-            // Find the 'default' item and add the 'selected' attribute
-            const defaultItem = presetSelect.querySelector('sp-menu-item[value="default"]');
-            if (defaultItem) {
-                defaultItem.setAttribute('selected', '');
-            }
-        }
     }
 
     reset() {
