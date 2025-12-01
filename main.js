@@ -295,7 +295,6 @@ async function runPlugin(editor) {
 }
 
 // Initialize Curve Editor
-console.log("getting canvas element");
 const canvasElement = document.getElementById('curveCanvas');
 const presetSelect = document.getElementById('presetSelect');
 
