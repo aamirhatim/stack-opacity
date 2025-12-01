@@ -1,7 +1,7 @@
 {
-  "name": "uxp-template-ps-starter",
+  "name": "stack-opacity",
   "version": "1.0.0",
-  "description": "Starter template for creating Adobe UXP based-Photoshop plugin.",
-  "author": "Adobe Inc",
+  "description": "A utility to configure opacity levels for stacks.",
+  "author": "Aamir Husain",
   "license": "Apache-2.0"
 }
