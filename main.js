@@ -33,6 +33,7 @@ class CurveEditor {
         this.canvas.addEventListener('pointermove', (e) => this.onPointerMove(e));
         this.canvas.addEventListener('pointerup', () => this.onPointerUp());
         this.canvas.addEventListener('dblclick', (e) => this.onDbClick(e));
+        this.canvas.addEventListener('pointerleave', () => this.onPointerLeave());
         window.addEventListener('resize', () => this.resizeCanvas());
     }
 
@@ -98,7 +99,6 @@ class CurveEditor {
     }
 
     onPointerDown(e) {
-        console.log("Pointer down");
         const m = this.getMousePos(e);
 
         // 1. Check if clicking an existing point
@@ -119,8 +119,6 @@ class CurveEditor {
     }
 
     onPointerMove(e) {
-        console.log("Pointer move");
-
         if (this.dragIndex !== -1) {
             const m = this.getMousePos(e);
 
@@ -150,12 +148,10 @@ class CurveEditor {
     }
 
     onPointerUp() {
-        console.log("Pointer up");
         this.dragIndex = -1; // Reset drag index point
     }
 
     onDbClick(e) {
-        console.log("Double click");
         const m = this.getMousePos(e);
 
         // Check if clicking an existing point
@@ -166,6 +162,12 @@ class CurveEditor {
             // Remove point
             this.points.splice(foundIndex, 1);
             this.draw();
+        }
+    }
+
+    onPointerLeave() {
+        if (this.dragIndex !== -1) {
+            this.dragIndex = -1; // Reset drag index point
         }
     }
 
