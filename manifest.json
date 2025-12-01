@@ -18,7 +18,7 @@
             "default": "Stack Opacity"
         },
         "minimumSize": {
-            "width": 300,
+            "width": 350,
             "height": 300
         },
         "maximumSize":{
@@ -26,7 +26,7 @@
             "height": 700
         },
         "preferredFloatingSize": { 
-            "width": 300,
+            "width": 350,
             "height": 400
         },
         "preferredDockedSize": {
