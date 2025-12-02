@@ -48,7 +48,23 @@
             "preferredDockedSize": {
                 "width": 500,
                 "height": 300
-            }
+            },
+            "icons": [
+                {
+                    "width": 23,
+                    "height": 23,
+                    "path": "icons/light.png",
+                    "scale": [1, 2],
+                    "theme": ["light", "lightest"]
+                },
+                {
+                    "width": 23,
+                    "height": 23,
+                    "path": "icons/dark.png",
+                    "scale": [1, 2],
+                    "theme": ["dark", "darkest"]
+                }
+            ]
         }
     ]
 }
