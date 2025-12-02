@@ -50,3 +50,17 @@ This plugin is built using the Adobe UXP (Unified Extensibility Platform) and re
       * Launch or switch to Adobe Photoshop.
       * Go to the main menu: **Plugins \> Stack Opacity**
       * The **Stack Opacity** panel will open, ready for use.
+
+## ☄️ Star Trail Editing Tips
+
+### Experiment using other filters after applying your desired opacity curve.
+
+* **Diffuse** (Filters > Stylize > Diffuse): A subtle filter to help close up any tiny trail gaps between images. It also helps to slightly reduce color noise so the trails are a more uniform color. Anisotropic mode tends to give me the best results.
+* **Oil Paint** (Filters > Stylize > Oil Paint): Goof for closing larger trail gaps and makes them look "fuller". Experiment with the sliders but my preferred settings are:
+    *   Stylization: <= 2.3
+    *   Cleanliess: 10.0
+    *   Scale: 0.1
+    *   Bristle Detail: 0.0
+    *   Lighting: Disabled
+* **Motion Blur** (Filters > Blur > Motion Blur): Good for trails that are mostly straight. Closes larger trail gaps.
+* **Radial Blur** (Filters > Blur > Radial Blur): Can be used for circular star trails but can have mixed results especially if the trail has some lens distortion making it not a more perfect circle
