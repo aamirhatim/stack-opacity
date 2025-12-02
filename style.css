@@ -17,6 +17,25 @@ body {
 
 }
 
+#theme {
+    display: none;
+}
+
+#primary-theme {
+    background-color: var(--uxp-host-background-color);
+    color: var(--uxp-host-text-color);
+    border-color: var(--uxp-host-border-color);
+}
+
+#primary-theme a {
+    color: var(--uxp-host-link-text-color);
+}
+
+#secondary-theme {
+    background-color: var(--uxp-host-widget-hover-border-color);
+    color: var(--uxp-host-text-color-secondary);
+}
+
 sp-heading {
     margin-top: 0px;
     margin-bottom: 8px;
@@ -34,6 +53,7 @@ canvas {
     display: block;
     width: 100%;
     height: 100%;
+    background-color: var(--uxp-host-background-color);
 }
 
 .instructions {
