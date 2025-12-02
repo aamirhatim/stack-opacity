@@ -1,6 +1,6 @@
 {
   "name": "stack-opacity",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A utility to configure opacity levels for stacks.",
   "author": "Aamir Husain",
   "license": "Apache-2.0"
