@@ -6,29 +6,15 @@
         {
             "width": 23,
             "height": 23,
-            "path": "icons/light@1x.png",
-            "scale": [1],
-            "theme": ["light", "lightest"]
-        },
-        {
-            "width": 46,
-            "height": 46,
-            "path": "icons/light@2x.png",
-            "scale": [2],
+            "path": "icons/light.png",
+            "scale": [1, 2],
             "theme": ["light", "lightest"]
         },
         {
             "width": 23,
             "height": 23,
-            "path": "icons/dark@1x.png",
-            "scale": [1],
-            "theme": ["dark", "darkest"]
-        },
-        {
-            "width": 46,
-            "height": 46,
-            "path": "icons/dark@2x.png",
-            "scale": [2],
+            "path": "icons/dark.png",
+            "scale": [1, 2],
             "theme": ["dark", "darkest"]
         }
     ],
@@ -43,9 +29,9 @@
     "entrypoints": [
         {
             "type": "panel",
-            "id": "mainPanel",
+            "id": "curvePanel",
             "label": {
-                "default": "Stack Opacity"
+                "default": "Opacity Curve"
             },
             "minimumSize": {
                 "width": 350,
@@ -62,25 +48,7 @@
             "preferredDockedSize": {
                 "width": 500,
                 "height": 300
-            },
-            "icons": [
-                {
-                    "width": 23,
-                    "height": 23,
-                    "path": "icons/light@1x.png",
-                    "scale": [1, 2],
-                    "theme": ["light", "lightest"],
-                    "species": ["generic"]
-                },
-                {
-                    "width": 23,
-                    "height": 23,
-                    "path": "icons/dark@1x.png",
-                    "scale": [1, 2],
-                    "theme": ["dark", "darkest"],
-                    "species": ["generic"]
-                }
-            ]
+            }
         }
     ]
 }
