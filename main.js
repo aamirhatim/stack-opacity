@@ -12,9 +12,12 @@ class CurveEditor {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
 
+        // Set initial theme
+        this.theme = {};
+        
         // Set default curve
         this.currentPreset = 'default';
-        this.loadPreset('default');
+        this.points = PRESETS['default']; 
 
         // Set canvas size
         this.resizeCanvas();
@@ -34,6 +37,26 @@ class CurveEditor {
         this.canvas.addEventListener('dblclick', (e) => this.onDbClick(e));
         this.canvas.addEventListener('pointerleave', () => this.onPointerLeave());
         window.addEventListener('resize', () => this.resizeCanvas());
+    }
+
+    getTheme() {
+        const primaryTheme = document.getElementById('primary-theme');
+        const primaryStyles = window.getComputedStyle(primaryTheme);
+        const linkTheme = primaryTheme.querySelector('a');
+        const linkStyles = window.getComputedStyle(linkTheme);
+        const secondaryTheme = document.getElementById('secondary-theme');
+        const secondaryStyles = window.getComputedStyle(secondaryTheme);
+
+        this.theme = {
+            backgroundColor: primaryStyles.getPropertyValue('background-color').trim(),
+            borderColor: primaryStyles.getPropertyValue('border-color').trim(),
+            textColor: primaryStyles.getPropertyValue('color').trim(),
+            linkColor: linkStyles.getPropertyValue('color').trim(),
+            secondary: {
+                backgroundColor: secondaryStyles.getPropertyValue('background-color').trim(),
+                textColor: secondaryStyles.getPropertyValue('color').trim()
+            }
+        };
     }
 
     loadPreset(presetName) {
@@ -171,17 +194,20 @@ class CurveEditor {
     }
 
     draw() {
+        // Get current theme
+        this.getTheme();
+
         // Get dimensions and clear points
         const w = this.width;
         const h = this.height;
         this.ctx.clearRect(0, 0, w, h);
 
         // Fill background
-        this.ctx.fillStyle = '#333';
+        this.ctx.fillStyle = this.theme.backgroundColor;
         this.ctx.fillRect(0, 0, w, h);
 
         // Draw Grid
-        this.ctx.strokeStyle = '#444';
+        this.ctx.strokeStyle = this.theme.borderColor;
         this.ctx.lineWidth = 1;
         this.ctx.beginPath();
         const steps = [0.25, 0.5, 0.75];
@@ -216,13 +242,14 @@ class CurveEditor {
         this.ctx.stroke();
 
         // Draw Control Points
-        this.ctx.fillStyle = '#FFF';
+        this.ctx.strokeStyle = this.theme.textColor;
+        this.ctx.lineWidth = 2.5;
         this.points.forEach(p => {
             const px = p.x * w;
             const py = (1 - p.y) * h;
             this.ctx.beginPath();
             this.ctx.arc(px, py, 5, 0, 2 * Math.PI);
-            this.ctx.fill();
+            this.ctx.stroke();
         });
     }
 
