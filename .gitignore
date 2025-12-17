@@ -1,3 +1,4 @@
 *.ai
 *.ccx
 .DS_Store
+.vscode
