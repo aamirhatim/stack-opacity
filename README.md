@@ -8,7 +8,7 @@ The **Stack Opacity** plugin for Adobe Photoshop provides a powerful, visual cur
   * **Custom Points:** Click anywhere on the curve to add a new control point. Click and drag existing points. Double click to remove points.
   * **Presets:** Quickly load pre-defined curves like "Comet," "Bell," or "Full."
   * **Invert Functionality:** Horizontally mirror the current curve (flip the effect across the layer stack).
-  * **Blend Mode: ** Select blend mode for your stack (default is Lighten).
+  * **Blend Mode:** Select blend mode for your stack (default is Lighten).
 
 ## 🚀 How to Use
 
