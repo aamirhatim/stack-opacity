@@ -1,4 +1,4 @@
-const { app, core } = require('photoshop');
+const { app, core, constants } = require('photoshop');
 
 const PRESETS = {
     default: [{ x: 0, y: 1 }, { x: 1, y: 0 }],
@@ -14,10 +14,10 @@ class CurveEditor {
 
         // Set initial theme
         this.theme = {};
-        
+
         // Set default curve
         this.currentPreset = 'default';
-        this.points = PRESETS['default']; 
+        this.points = PRESETS['default'];
 
         // Set canvas size
         this.resizeCanvas();
@@ -62,7 +62,7 @@ class CurveEditor {
     loadPreset(presetName) {
         console.log(`Loading preset: ${presetName}`);
         if (PRESETS[presetName]) {
-            this.points = JSON.parse(JSON.stringify(PRESETS[presetName])); 
+            this.points = JSON.parse(JSON.stringify(PRESETS[presetName]));
             this.draw();
             this.currentPreset = presetName;
         }
@@ -126,7 +126,7 @@ class CurveEditor {
         // 1. Check if clicking an existing point
         const hitDist = 0.05; // Hit box size
         const foundIndex = this.points.findIndex(p => Math.abs(p.x - m.x) < hitDist && Math.abs(p.y - m.y) < hitDist);
-        
+
         if (foundIndex !== -1) {
             // Update drag index
             this.dragIndex = foundIndex;
@@ -135,7 +135,7 @@ class CurveEditor {
             this.points.push({ x: m.x, y: m.y });
             this.points.sort((a, b) => a.x - b.x); // Sort points to draw a proper line
             this.draw();
-            
+
             this.dragIndex = this.points.findIndex(p => p.x === m.x && p.y === m.y); // Set drag index to new point
         }
     }
@@ -145,14 +145,14 @@ class CurveEditor {
             const m = this.getMousePos(e);
 
             // Get the X-coordinate of the left neighbor (or 0 if it's the first point)
-            const minX = this.dragIndex === 0 
-                        ? 0 
-                        : this.points[this.dragIndex - 1].x;
+            const minX = this.dragIndex === 0
+                ? 0
+                : this.points[this.dragIndex - 1].x;
 
             // Get the X-coordinate of the right neighbor (or 1 if it's the last point)
-            const maxX = this.dragIndex === this.points.length - 1 
-                        ? 1 
-                        : this.points[this.dragIndex + 1].x;
+            const maxX = this.dragIndex === this.points.length - 1
+                ? 1
+                : this.points[this.dragIndex + 1].x;
 
             // 2. Clamp the new X and Y coordinates
             let newX = Math.max(minX, Math.min(maxX, m.x));
@@ -160,7 +160,7 @@ class CurveEditor {
 
             // Lock X-coordinate for first and last points
             if (this.dragIndex === 0 || this.dragIndex === this.points.length - 1) {
-                newX = this.points[this.dragIndex].x; 
+                newX = this.points[this.dragIndex].x;
             }
 
             // Update point position and redraw
@@ -179,7 +179,7 @@ class CurveEditor {
         // Check if clicking an existing point
         const hitDist = 0.05; // Hit box size
         const foundIndex = this.points.findIndex(p => Math.abs(p.x - m.x) < hitDist && Math.abs(p.y - m.y) < hitDist);
-        
+
         if (foundIndex !== -1 && foundIndex > 0 && foundIndex < this.points.length - 1) {
             // Remove point
             this.points.splice(foundIndex, 1);
@@ -232,7 +232,7 @@ class CurveEditor {
         this.ctx.strokeStyle = '#00AAFF';
         this.ctx.lineWidth = 2;
         this.ctx.beginPath();
-        
+
         this.points.forEach((p, index) => {
             const px = p.x * w;
             const py = (1 - p.y) * h; // Flip Y back for canvas
@@ -257,13 +257,13 @@ class CurveEditor {
         // Apply the X-axis mirror transformation
         this.points = this.points.map(p => {
             return {
-                x: 1.0 - p.x, 
-                y: p.y 
+                x: 1.0 - p.x,
+                y: p.y
             };
         });
-        
+
         // Re-sort the array
-        this.points.sort((a, b) => a.x - b.x); 
+        this.points.sort((a, b) => a.x - b.x);
         this.draw();
     }
 
@@ -273,8 +273,54 @@ class CurveEditor {
     }
 }
 
+function getBlendMode(modeString) {
+    if (!modeString) return constants.BlendMode.NORMAL;
+
+    switch (modeString) {
+        case 'normal': return constants.BlendMode.NORMAL;
+        case 'dissolve': return constants.BlendMode.DISSOLVE;
+
+        case 'darken': return constants.BlendMode.DARKEN;
+        case 'multiply': return constants.BlendMode.MULTIPLY;
+        case 'colorBurn': return constants.BlendMode.COLORBURN;
+        case 'linearBurn': return constants.BlendMode.LINEARBURN;
+        case 'darkerColor': return constants.BlendMode.DARKERCOLOR;
+
+        case 'lighten': return constants.BlendMode.LIGHTEN;
+        case 'screen': return constants.BlendMode.SCREEN;
+        case 'colorDodge': return constants.BlendMode.COLORDODGE;
+        case 'linearDodge': return constants.BlendMode.LINEARDODGE;
+        case 'lighterColor': return constants.BlendMode.LIGHTERCOLOR;
+
+        case 'overlay': return constants.BlendMode.OVERLAY;
+        case 'softLight': return constants.BlendMode.SOFTLIGHT;
+        case 'hardLight': return constants.BlendMode.HARDLIGHT;
+        case 'vividLight': return constants.BlendMode.VIVIDLIGHT;
+        case 'linearLight': return constants.BlendMode.LINEARLIGHT;
+        case 'pinLight': return constants.BlendMode.PINLIGHT;
+        case 'hardMix': return constants.BlendMode.HARDMIX;
+
+        case 'difference': return constants.BlendMode.DIFFERENCE;
+        case 'exclusion': return constants.BlendMode.EXCLUSION;
+        case 'subtract': return constants.BlendMode.SUBTRACT;
+        case 'divide': return constants.BlendMode.DIVIDE;
+
+        case 'hue': return constants.BlendMode.HUE;
+        case 'saturation': return constants.BlendMode.SATURATION;
+        case 'color': return constants.BlendMode.COLOR;
+        case 'luminosity': return constants.BlendMode.LUMINOSITY;
+
+        default: return constants.BlendMode.NORMAL;
+    }
+}
+
 async function runPlugin(editor) {
     console.log("Running plugin...");
+
+    const blendModeSelect = document.getElementById('blendModeSelect');
+    const selectedBlendMode = getBlendMode(blendModeSelect ? blendModeSelect.value : null);
+
+    console.log(`Selected blend mode: ${selectedBlendMode}`);
 
     await core.executeAsModal(async () => {
         const doc = app.activeDocument;
@@ -298,10 +344,10 @@ async function runPlugin(editor) {
             console.log(`Layer ${i}: Setting opacity to ${finalOpacity.toFixed(2)}%`);
 
             // Apply
-            layer.blendMode = "lighten";
+            layer.blendMode = selectedBlendMode;
             layer.opacity = finalOpacity;
         }
-    }, {"commandName": "Apply Curve Trail"});
+    }, { "commandName": "Apply Curve Trail" });
 }
 
 // Initialize Curve Editor
@@ -336,7 +382,7 @@ function waitForLayout(canvasElement, retries = 0) {
 
     if (retries >= MAX_RETRIES) {
         console.error("Failed to get non-zero dimensions after max retries. Plugin may not size correctly.");
-        
+
         // Fallback is to initialize anyways
         // TODO change this behavior later
         const editor = new CurveEditor(canvasElement);
