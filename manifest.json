@@ -1,21 +1,33 @@
 {
     "id": "52c22891",
     "name": "Stack Opacity",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "icons": [
         {
             "width": 23,
             "height": 23,
             "path": "icons/light.png",
-            "scale": [1, 2],
-            "theme": ["light", "lightest"]
+            "scale": [
+                1,
+                2
+            ],
+            "theme": [
+                "light",
+                "lightest"
+            ]
         },
         {
             "width": 23,
             "height": 23,
             "path": "icons/dark.png",
-            "scale": [1, 2],
-            "theme": ["dark", "darkest"]
+            "scale": [
+                1,
+                2
+            ],
+            "theme": [
+                "dark",
+                "darkest"
+            ]
         }
     ],
     "main": "index.html",
@@ -37,11 +49,11 @@
                 "width": 350,
                 "height": 300
             },
-            "maximumSize":{
+            "maximumSize": {
                 "width": 800,
                 "height": 700
             },
-            "preferredFloatingSize": { 
+            "preferredFloatingSize": {
                 "width": 350,
                 "height": 400
             },
@@ -54,15 +66,27 @@
                     "width": 23,
                     "height": 23,
                     "path": "icons/light.png",
-                    "scale": [1, 2],
-                    "theme": ["light", "lightest"]
+                    "scale": [
+                        1,
+                        2
+                    ],
+                    "theme": [
+                        "light",
+                        "lightest"
+                    ]
                 },
                 {
                     "width": 23,
                     "height": 23,
                     "path": "icons/dark.png",
-                    "scale": [1, 2],
-                    "theme": ["dark", "darkest"]
+                    "scale": [
+                        1,
+                        2
+                    ],
+                    "theme": [
+                        "dark",
+                        "darkest"
+                    ]
                 }
             ]
         }
