@@ -270,6 +270,12 @@ class CurveEditor {
     reset() {
         // Reset spline to default prest values
         this.loadPreset(this.currentPreset);
+
+        // Reset blend mode dropdown to Lighten
+        const blendModeSelect = document.getElementById('blendModeSelect');
+        if (blendModeSelect) {
+            blendModeSelect.selectedIndex = 7; // 8th item in dropdown menu (see index.html)
+        }
     }
 }
 
