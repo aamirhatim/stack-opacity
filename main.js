@@ -285,19 +285,16 @@ function getBlendMode(modeString) {
     switch (modeString) {
         case 'normal': return constants.BlendMode.NORMAL;
         case 'dissolve': return constants.BlendMode.DISSOLVE;
-
         case 'darken': return constants.BlendMode.DARKEN;
         case 'multiply': return constants.BlendMode.MULTIPLY;
         case 'colorBurn': return constants.BlendMode.COLORBURN;
         case 'linearBurn': return constants.BlendMode.LINEARBURN;
         case 'darkerColor': return constants.BlendMode.DARKERCOLOR;
-
         case 'lighten': return constants.BlendMode.LIGHTEN;
         case 'screen': return constants.BlendMode.SCREEN;
         case 'colorDodge': return constants.BlendMode.COLORDODGE;
         case 'linearDodge': return constants.BlendMode.LINEARDODGE;
         case 'lighterColor': return constants.BlendMode.LIGHTERCOLOR;
-
         case 'overlay': return constants.BlendMode.OVERLAY;
         case 'softLight': return constants.BlendMode.SOFTLIGHT;
         case 'hardLight': return constants.BlendMode.HARDLIGHT;
@@ -305,12 +302,10 @@ function getBlendMode(modeString) {
         case 'linearLight': return constants.BlendMode.LINEARLIGHT;
         case 'pinLight': return constants.BlendMode.PINLIGHT;
         case 'hardMix': return constants.BlendMode.HARDMIX;
-
         case 'difference': return constants.BlendMode.DIFFERENCE;
         case 'exclusion': return constants.BlendMode.EXCLUSION;
         case 'subtract': return constants.BlendMode.SUBTRACT;
         case 'divide': return constants.BlendMode.DIVIDE;
-
         case 'hue': return constants.BlendMode.HUE;
         case 'saturation': return constants.BlendMode.SATURATION;
         case 'color': return constants.BlendMode.COLOR;
@@ -370,8 +365,6 @@ function waitForLayout(canvasElement, retries = 0) {
 
         // Create new curve editor
         const editor = new CurveEditor(canvasElement);
-
-
 
         // Create listener for preset menu
         presetSelect.addEventListener('change', (e) => {
